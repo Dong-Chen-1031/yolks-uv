@@ -1,368 +1,153 @@
-# Yolks
+# Python with UV - Yolks Images & Pterodactyl/Pelican Egg
 
-A curated collection of core images that can be used with Pterodactyl's Egg system. Each image is rebuilt
-periodically to ensure dependencies are always up-to-date.
+A complete solution for running Python applications on Pterodactyl/Pelican panels, consisting of:
 
-Images are hosted on `ghcr.io` and exist under the `games`, `installers`, and `yolks` spaces. The following logic
-is used when determining which space an image will live under:
+1. **Docker Images (Yolks)**: Python images with UV package manager pre-installed for blazing-fast dependency management
+2. **Pterodactyl/Pelican Egg**: A ready-to-use egg configuration based on [pelican-eggs/generic](https://github.com/pelican-eggs/generic), optimized for Python applications with UV support
 
-* `games` — anything within the `games` folder in the repository. These are images built for running a specific game
-or type of game.
-* `installers` — anything living within the `installers` directory. These images are used by install scripts for different
-Eggs within Pterodactyl, not for actually running a game server. These images are only designed to reduce installation time
-and network usage by pre-installing common installation dependencies such as `curl` and `wget`.
-* `yolks` — these are more generic images that allow different types of games or scripts to run. They're generally just
-a specific version of software and allow different Eggs within Pterodactyl to switch out the underlying implementation. An
-example of this would be something like Java or Python which are used for running bots, Minecraft servers, etc.
+This project provides a modern, high-performance Python development environment with automatic dependency management and deployment workflow.
 
-All of these images are available for `linux/amd64` and `linux/arm64` versions, unless otherwise specified, to use
-these images on an arm system, no modification to them or the tag is needed, they should just work.
+## Quick Start
 
-## Contributing
+### Import the Egg Configuration
 
-When adding a new version to an existing image, such as `java v42`, you'd add it within a child folder of `java`, so
-`java/42/Dockerfile` for example. Please also update the correct `.github/workflows` file to ensure that this new version
-is tagged correctly.
+Choose the egg file based on your panel type:
+
+#### For Pelican Panel (Recommended)
+```
+https://raw.githubusercontent.com/Dong-Chen-1031/yolks-uv/refs/heads/master/egg/egg-python-uv.json
+```
+
+#### For Pterodactyl Panel
+```
+https://raw.githubusercontent.com/Dong-Chen-1031/yolks-uv/refs/heads/master/egg/egg-pterodactyl-python-uv.json
+```
+
+**Import Steps:**
+1. In your admin panel, navigate to **Nests** → Select your nest → **Import Egg**
+2. Paste the appropriate URL above in the import field
+3. Click import and the egg will be automatically configured
+
+**Alternative Downloads:**
+- [Pelican: egg-python-uv.json](https://raw.githubusercontent.com/Dong-Chen-1031/yolks-uv/refs/heads/master/egg/egg-python-uv.json)
+- [Pterodactyl: egg-pterodactyl-python-uv.json](https://raw.githubusercontent.com/Dong-Chen-1031/yolks-uv/refs/heads/master/egg/egg-pterodactyl-python-uv.json)
+
+### Deploy Your Application
+
+After importing the egg:
+1. Create a new server using the "Python with UV" egg
+2. Select your desired Python version from the Docker images dropdown
+3. Configure your application:
+   - **Git Repo Address**: Your repository URL
+   - **App py file**: Your main Python file (default: `app.py`)
+   - **Requirements file**: Your requirements file (default: `requirements.txt`)
+4. Start your server and the application will automatically deploy
+
+## Components
+
+### 1. Docker Images (Yolks)
+Pre-built Python images with UV package manager, hosted on GitHub Container Registry. These images serve as the runtime environment for your Python applications.
+
+### 2. Pterodactyl/Pelican Egg
+A complete egg configuration file (`egg/egg-python-uv.json`) based on [pelican-eggs/generic](https://github.com/pelican-eggs/generic), customized to:
+- Use UV for package management instead of traditional pip
+- Support git-based deployments
+- Enable automatic updates
+- Provide flexible configuration options
+
+## Features
+
+- **UV Package Manager**: Lightning-fast Python package installer and resolver, written in Rust
+- **Multi-Version Support**: Python versions from 3.8 to 3.14
+- **Multi-Architecture**: Available for both `linux/amd64` and `linux/arm64`
+- **Auto-Updates**: Built-in support for git repository auto-updates
+- **Requirements Management**: Automatic installation from requirements.txt
+- **Optimized for Pterodactyl/Pelican**: Ready-to-use with the included egg configuration
+
+## Why UV?
+
+[UV](https://github.com/astral-sh/uv) is a drop-in replacement for pip that offers:
+- 10-100x faster package installation
+- Better dependency resolution
+- Improved caching mechanisms
+- Written in Rust for maximum performance
+
+## Configuration Options
+
+The images support several configuration options through environment variables:
+
+- **GIT_ADDRESS**: Your git repository URL
+- **BRANCH**: Specific branch to clone (optional)
+- **PY_FILE**: Main Python file to execute (default: `app.py`)
+- **REQUIREMENTS_FILE**: Requirements file name (default: `requirements.txt`)
+- **PY_PACKAGES**: Additional packages to install (space-separated)
+- **AUTO_UPDATE**: Enable automatic git pull on startup (0 or 1)
+- **USERNAME/ACCESS_TOKEN**: Git authentication credentials (optional)
+
 
 ## Available Images
 
-### [Oses](/oses)
+All images are hosted on GitHub Container Registry (ghcr.io):
 
-* [alpine](/oses/alpine)
-  * `ghcr.io/parkervcp/yolks:alpine`
-* [debian](/oses/debian)
-  * `ghcr.io/parkervcp/yolks:debian`
-* [ubuntu](/oses/ubuntu)
-  * `ghcr.io/parkervcp/yolks:ubuntu`
+### Python with UV
 
-### [Apps](/apps)
+* [`python_uv_3.14`](/python_uv/3.14)
+  * `ghcr.io/dong-chen-1031/yolks:python_uv_3.14`
+* [`python_uv_3.13`](/python_uv/3.13)
+  * `ghcr.io/dong-chen-1031/yolks:python_uv_3.13`
+* [`python_uv_3.12`](/python_uv/3.12)
+  * `ghcr.io/dong-chen-1031/yolks:python_uv_3.12`
+* [`python_uv_3.11`](/python_uv/3.11)
+  * `ghcr.io/dong-chen-1031/yolks:python_uv_3.11`
+* [`python_uv_3.10`](/python_uv/3.10)
+  * `ghcr.io/dong-chen-1031/yolks:python_uv_3.10`
+* [`python_uv_3.9`](/python_uv/3.9)
+  * `ghcr.io/dong-chen-1031/yolks:python_uv_3.9`
+* [`python_uv_3.8`](/python_uv/3.8)
+  * `ghcr.io/dong-chen-1031/yolks:python_uv_3.8`
 
-* [`uptimekuma`](/apps/uptimekuma)
-  * `ghcr.io/parkervcp/yolks:apps_uptimekuma`
+## Installation Script
 
-### [Bot](/bot)
+The egg includes an installation script that:
+1. Clones your git repository
+2. Installs UV package manager
+3. Installs dependencies from requirements.txt or specified packages
+4. Prepares the environment for your Python application
 
-* [`bastion`](/bot/bastion)
-  * `ghcr.io/parkervcp/yolks:bot_bastion`
-* [`parkertron`](/bot/parkertron)
-  * `ghcr.io/parkervcp/yolks:bot_parkertron`
-* [`redbot`](/bot/red)
-  * `ghcr.io/parkervcp/yolks:bot_red`
-* [`sinusbot`](/bot/sinusbot)
-  * `ghcr.io/parkervcp/yolks:bot_sinusbot`
+## Startup Behavior
 
-### [Box64](/box64)
+On each server start, the container will:
+1. Pull latest changes from git (if AUTO_UPDATE is enabled)
+2. Install any additional packages specified in PY_PACKAGES
+3. Install/update requirements from requirements.txt (if exists)
+4. Execute your specified Python file
 
-* [`Box64`](/box64)
-  * `ghcr.io/parkervcp/yolks:box64`
+## Building
 
-### [Bun](/bun)
+Images are automatically built via GitHub Actions on:
+- Weekly schedule (every Monday)
+- Push to master branch with changes in `python_uv/**`
+- Manual workflow dispatch
 
-* [`Bun Canary`](/bun/canary)
-  * `ghcr.io/parkervcp/yolks:bun_canary`
-* [`Bun Latest`](/bun/latest)
-  * `ghcr.io/parkervcp/yolks:bun_latest`
+To build locally:
+```bash
+docker build -t python_uv:3.13 ./python_uv/3.13
+```
 
-### [Cassandra](/cassandra)
+## Contributing
 
-* [`cassandra_java8_python27`](/cassandra/cassandra_java8_python2)
-  * `ghcr.io/parkervcp/yolks:cassandra_java11_python2`
-* [`cassandra_java11_python3`](/cassandra/cassandra_java11_python3)
-  * `ghcr.io/parkervcp/yolks:cassandra_java11_python3`
+Contributions are welcome! When adding a new Python version:
 
-### [Dart](/dart)
+1. Create a new directory under `python_uv/` with the version number
+2. Add a Dockerfile based on the existing versions
+3. Update the `.github/workflows/python.yml` matrix to include the new version
+4. Update this README with the new image tag
 
-* [`dart2.17`](/dart/2.17)
-  * `ghcr.io/parkervcp/yolks:dart_2.17`
-* [`dart2.18`](/dart/2.18)
-  * `ghcr.io/parkervcp/yolks:dart_2.18`
-* [`dart2.19`](/dart/2.19)
-  * `ghcr.io/parkervcp/yolks:dart_2.19`
-* [`dart3.3`](/dart/3.3)
-  * `ghcr.io/parkervcp/yolks:dart_3.3`
-* [`dart stable`](/dart/stable)
-  * `ghcr.io/parkervcp/yolks:dart_stable`
+## License
 
-### [dotNet](/dotnet)
+See [LICENSE.md](LICENSE.md) for details.
 
-* [`dotnet2.1`](/dotnet/2.1)
-  * `ghcr.io/parkervcp/yolks:dotnet_2.1`
-* [`dotnet3.1`](/dotnet/3.1)
-  * `ghcr.io/parkervcp/yolks:dotnet_3.1`
-* [`dotnet5.0`](/dotnet/5)
-  * `ghcr.io/parkervcp/yolks:dotnet_5`
-* [`dotnet6.0`](/dotnet/6)
-  * `ghcr.io/parkervcp/yolks:dotnet_6`
-* [`dotnet7.0`](/dotnet/7)
-  * `ghcr.io/parkervcp/yolks:dotnet_7`
-* [`dotnet8.0`](/dotnet/8)
-  * `ghcr.io/parkervcp/yolks:dotnet_8`
-* [`dotnet9.0`](/dotnet/9)
-  * `ghcr.io/parkervcp/yolks:dotnet_9`
-* [`dotnet10.0`](/dotnet/10)
-  * `ghcr.io/parkervcp/yolks:dotnet_10`  
+## Credits
 
-### [Elixir](/elixir)
-
-* [`elixir 1.12`](/elixir/1.12)
-  * `ghcr.io/parkervcp/yolks:elixir_1.12`
-* [`elixir 1.13`](/elixir/1.13)
-  * `ghcr.io/parkervcp/yolks:elixir_1.13`
-* [`elixir 1.14`](/elixir/1.14)
-  * `ghcr.io/parkervcp/yolks:elixir_1.14`
-* [`elixir 1.15`](/elixir/1.12)
-  * `ghcr.io/parkervcp/yolks:elixir_1.15`
-* [`elixir latest`](/elixir/latest)
-  * `ghcr.io/parkervcp/yolks:elixir_latest`
-
-### [Erlang](/erlang)
-
-* [`erlang22`](/erlang/22)
-  * `ghcr.io/parkervcp/yolks:erlang_22`
-* [`erlang23`](/erlang/23)
-  * `ghcr.io/parkervcp/yolks:erlang_23`
-* [`erlang24`](/erlang/24)
-  * `ghcr.io/parkervcp/yolks:erlang_24`
-
-### [Games](/games)
-
-* [`altv`](/games/altv)
-  * `ghcr.io/parkervcp/games:altv`
-* [`arma3`](/games/arma3)
-  * `ghcr.io/parkervcp/games:arma3`
-* [`dayz`](/games/dayz)
-  * `ghcr.io/parkervcp/games:dayz`
-* [`minetest`](/games/minetest)
-  * `ghcr.io/parkervcp/games:minetest`  
-* [`mohaa`](games/mohaa)
-  * `ghcr.io/parkervcp/games:mohaa`  
-* [`Multi Theft Auto: San Andreas`](games/mta)
-  * `ghcr.io/parkervcp/games:mta` 
-* [`Rust (dedicated server)`](games/rust)
-  * `ghcr.io/parkervcp/games:rust`      
-* [`samp`](/games/samp)
-  * `ghcr.io/parkervcp/games:samp`  
-* [`source`](/games/source)
-  * `ghcr.io/parkervcp/games:source`
-* [`thebattleforwesnoth`](/games/thebattleforwesnoth)
-  * `ghcr.io/parkervcp/games:thebattleforwesnoth`
-* [`valheim`](/games/valheim)
-  * `ghcr.io/parkervcp/games:valheim`
-* [`zandronum`](/games/zandronum)
-  * `ghcr.io/parkervcp/games:zandronum`
-
-### [Golang](/go)
-
-* [`go1.14`](/go/1.14)
-  * `ghcr.io/parkervcp/yolks:go_1.14`
-* [`go1.15`](/go/1.15)
-  * `ghcr.io/parkervcp/yolks:go_1.15`
-* [`go1.16`](/go/1.16)
-  * `ghcr.io/parkervcp/yolks:go_1.16`
-* [`go1.17`](/go/1.17)
-  * `ghcr.io/parkervcp/yolks:go_1.17`
-* [`go1.18`](/go/1.18)
-  * `ghcr.io/parkervcp/yolks:go_1.18`
-* [`go1.19`](/go/1.19)
-  * `ghcr.io/parkervcp/yolks:go_1.19`
-* [`go1.20`](/go/1.20)
-  * `ghcr.io/parkervcp/yolks:go_1.20`
-* [`go1.21`](/go/1.21)
-  * `ghcr.io/parkervcp/yolks:go_1.21`
-* [`go1.22`](/go/1.22)
-  * `ghcr.io/parkervcp/yolks:go_1.22`
-* [`go1.23`](/go/1.23)
-  * `ghcr.io/parkervcp/yolks:go_1.23`
-
-### [Java](/java)
-
-* [`java8`](/java/8)
-  * `ghcr.io/parkervcp/yolks:java_8`
-* [`java11`](/java/11)
-  * `ghcr.io/parkervcp/yolks:java_11`
-* [`java16`](/java/16)
-  * `ghcr.io/parkervcp/yolks:java_16`
-* [`java17`](/java/17)
-  * `ghcr.io/parkervcp/yolks:java_17`
-* [`java19`](/java/19)
-  * `ghcr.io/parkervcp/yolks:java_19`
-* [`java21`](/java/21)
-  * `ghcr.io/parkervcp/yolks:java_21`
-* [`java22`](/java/22)
-  * `ghcr.io/parkervcp/yolks:java_22`
-* [`java25`](/java/25)
-  * `ghcr.io/parkervcp/yolks:java_25`
-
-### [MariaDB](/mariadb)
-
-  * [`MariaDB 10.3`](/mariadb/10.3)
-    * `ghcr.io/parkervcp/yolks:mariadb_10.3`
-  * [`MariaDB 10.4`](/mariadb/10.4)
-    * `ghcr.io/parkervcp/yolks:mariadb_10.4`
-  * [`MariaDB 10.5`](/mariadb/10.5)
-    * `ghcr.io/parkervcp/yolks:mariadb_10.5`
-  * [`MariaDB 10.6`](/mariadb/10.6)
-    * `ghcr.io/parkervcp/yolks:mariadb_10.6`
-  * [`MariaDB 10.7`](/mariadb/10.7)
-    * `ghcr.io/parkervcp/yolks:mariadb_10.7`
-  * [`MariaDB 11.2`](/mariadb/11.2)
-    * `ghcr.io/parkervcp/yolks:mariadb_11.2`
-  * [`MariaDB 11.3`](/mariadb/11.3)
-    * `ghcr.io/parkervcp/yolks:mariadb_11.3`
-  * [`MariaDB 11.4`](/mariadb/11.4)
-    * `ghcr.io/parkervcp/yolks:mariadb_11.4`
-  * [`MariaDB 11.5`](/mariadb/11.5)
-    * `ghcr.io/parkervcp/yolks:mariadb_11.5`
-  * [`MariaDB 11.6`](/mariadb/11.6)
-    * `ghcr.io/parkervcp/yolks:mariadb_11.6`
-
-### [MongoDB](/mongodb)
-
-  * [`MongoDB 5`](/mongodb/5)
-    * `ghcr.io/parkervcp/yolks:mongodb_5`
- * [`MongoDB 6`](/mongodb/6)
-    * `ghcr.io/parkervcp/yolks:mongodb_6`    
- * [`MongoDB 7`](/mongodb/7)
-    * `ghcr.io/parkervcp/yolks:mongodb_7`
- * [`MongoDB 8`](/mongodb/8)
-    * `ghcr.io/parkervcp/yolks:mongodb_8` 
-
-### [Mono](/mono)
-
-* [`mono_latest`](/mono/latest)
-  * `ghcr.io/parkervcp/yolks:mono_latest`
-
-### [Nodejs](/nodejs)
-
-* [`node12`](/nodejs/12)
-  * `ghcr.io/parkervcp/yolks:nodejs_12`
-* [`node14`](/nodejs/14)
-  * `ghcr.io/parkervcp/yolks:nodejs_14`
-* [`node16`](/nodejs/16)
-  * `ghcr.io/parkervcp/yolks:nodejs_16`
-* [`node17`](/nodejs/17)
-  * `ghcr.io/parkervcp/yolks:nodejs_17`
-* [`node18`](/nodejs/18)
-  * `ghcr.io/parkervcp/yolks:nodejs_18`
-* [`node19`](/nodejs/19)
-  * `ghcr.io/parkervcp/yolks:nodejs_19`
-* [`node20`](/nodejs/20)
-  * `ghcr.io/parkervcp/yolks:nodejs_20`
-* [`node21`](/nodejs/21)
-  * `ghcr.io/parkervcp/yolks:nodejs_21`
-* [`node22`](/nodejs/22)
-  * `ghcr.io/parkervcp/yolks:nodejs_22`  
-* [`node23`](/nodejs/23)
-  * `ghcr.io/parkervcp/yolks:nodejs_23`
-* [`node24`](/nodejs/24)
-  * `ghcr.io/parkervcp/yolks:nodejs_24`  
-  
-### [PostgreSQL](/postgres)
-
-  * [`Postgres 9`](/postgres/9)
-    * `ghcr.io/parkervcp/yolks:postgres_9`
-  * [`Postgres 10`](/postgres/10)
-    * `ghcr.io/parkervcp/yolks:postgres_10`
-  * [`Postgres 11`](/postgres/11)
-    * `ghcr.io/parkervcp/yolks:postgres_11`
-  * [`Postgres 12`](/postgres/12)
-    * `ghcr.io/parkervcp/yolks:postgres_12`
-  * [`Postgres 13`](/postgres/13)
-    * `ghcr.io/parkervcp/yolks:postgres_13`
-  * [`Postgres 14`](/postgres/14)
-    * `ghcr.io/parkervcp/yolks:postgres_14`
-  * [`Postgres 16`](/postgres/16)
-    * `ghcr.io/parkervcp/yolks:postgres_16`
-  * [`Postgres 17`](/postgres/17)
-    * `ghcr.io/parkervcp/yolks:postgres_17`
-  * [`Postgres 18`](/postgres/18)
-    * `ghcr.io/parkervcp/yolks:postgres_18`
-
-### [Python](/python)
-
-* [`python3.7`](/python/3.7)
-  * `ghcr.io/parkervcp/yolks:python_3.7`
-* [`python3.8`](/python/3.8)
-  * `ghcr.io/parkervcp/yolks:python_3.8`
-* [`python3.9`](/python/3.9)
-  * `ghcr.io/parkervcp/yolks:python_3.9`
-* [`python3.10`](/python/3.10)
-  * `ghcr.io/parkervcp/yolks:python_3.10`
-* [`python3.11`](/python/3.11)
-  * `ghcr.io/parkervcp/yolks:python_3.11`
-* [`python3.12`](/python/3.12)
-  * `ghcr.io/parkervcp/yolks:python_3.12`
-* [`python3.13`](/python/3.13)
-  * `ghcr.io/parkervcp/yolks:python_3.13`
-* [`python3.14`](/python/3.14)
-  * `ghcr.io/parkervcp/yolks:python_3.14`
-
-### [Redis](/redis)
-
-  * [`Redis 5`](/redis/5)
-    * `ghcr.io/parkervcp/yolks:redis_5`
-  * [`Redis 6`](/redis/6)
-    * `ghcr.io/parkervcp/yolks:redis_6`
-  * [`Redis 7`](/redis/7)
-    * `ghcr.io/parkervcp/yolks:redis_7`
-  * [`Redis 8`](/redis/8)
-    * `ghcr.io/parkervcp/yolks:redis_8`    
-
-### [Rust](/rust)
-
-* ['rust1.56'](/rust/1.56)
-  * `ghcr.io/parkervcp/yolks:rust_1.56`
-* ['rust1.60'](/rust/1.60)
-  * `ghcr.io/parkervcp/yolks:rust_1.60`
-* ['rust latest'](/rust/latest)
-  * `ghcr.io/parkervcp/yolks:rust_latest`
-
-### [SteamCMD](/steamcmd)
-* [`SteamCMD Debian lastest`](/steamcmd/debian)
-  * `ghcr.io/parkervcp/steamcmd:debian`
-* [`SteamCMD Debian Dotnet`](/steamcmd/dotnet)
-  * `ghcr.io/parkervcp/steamcmd:dotnet`
-* [`SteamCMD Proton`](/steamcmd/proton)
-  * `ghcr.io/parkervcp/steamcmd:proton`
-* [`SteamCMD Proton`](/steamcmd/proton_8)
-  * `ghcr.io/parkervcp/steamcmd:proton_8`
-* [`SteamCMD Sniper latest`](/steamcmd/sniper)
-  * `ghcr.io/parkervcp/steamcmd:sniper`
-* [`SteamCMD Ubuntu latest LTS`](/steamcmd/ubuntu)
-  * `ghcr.io/parkervcp/steamcmd:ubuntu`
-
-### [Voice](/voice)
-* [`Mumble`](/voice/mumble)
-  * `ghcr.io/parkervcp/yolks:voice_mumble`
-* [`TeaSpeak`](/voice/teaspeak)
-  * `ghcr.io/parkervcp/yolks:voice_teaspeak`
-
-### [Wine](/wine)
-
-* [`Wine`](/wine)
-  * `ghcr.io/parkervcp/yolks:wine_7`
-  * `ghcr.io/parkervcp/yolks:wine_8`
-  * `ghcr.io/parkervcp/yolks:wine_9`
-  * `ghcr.io/parkervcp/yolks:wine_10`
-  * `ghcr.io/parkervcp/yolks:wine_latest`
-  * `ghcr.io/parkervcp/yolks:wine_devel`
-  * `ghcr.io/parkervcp/yolks:wine_staging`
-
-### [Installation Images](/installers)
-
-* [`alpine-install`](/installers/alpine)
-  * `ghcr.io/parkervcp/installers:alpine`
-* [`debian-install`](/installers/debian)
-  * `ghcr.io/parkervcp/installers:debian`
-* [`ubuntu-install`](/installers/ubuntu)
-  * `ghcr.io/parkervcp/installers:ubuntu`
-* [`java8-install`](/installers/java_8)
-  * `ghcr.io/parkervcp/installers:java_8`
-* [`java11-install`](/installers/java_11)
-  * `ghcr.io/parkervcp/installers:java_11`
-* [`java17-install`](/installers/java_17)
-  * `ghcr.io/parkervcp/installers:java_17`
-* [`java21-install`](/installers/java_21)
-  * `ghcr.io/parkervcp/installers:java_21`
-* [`java25-install`](/installers/java_25)
-  * `ghcr.io/parkervcp/installers:java_25`
+- **Docker Images**: Based on [Pelican Eggs Yolks](https://github.com/pelican-eggs/yolks), modified to include UV package manager
+- **Egg Configuration**: Based on [Pelican Eggs Generic](https://github.com/pelican-eggs/generic), modified to support UV package manager and enhanced workflow
