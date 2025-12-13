@@ -5,12 +5,18 @@ LABEL       org.opencontainers.image.description="Installer image for Python UV 
 
 # Install all tools needed for git cloning and building Python packages
 RUN         apt update \
-            && apt -y install git curl jq file unzip make gcc g++ libtool ca-certificates \
-                              pkg-config libffi-dev libssl-dev zlib1g-dev libbz2-dev \
-                              libreadline-dev libsqlite3-dev libncurses5-dev libxml2-dev \
-                              libxmlsec1-dev liblzma-dev \
+            && apt -y install git curl jq file unzip make gcc g++ libtool ca-certificates dnsutils iproute2 ffmpeg procps tini\
             && apt clean \
+            && useradd -m -d /home/container container \
             && rm -rf /var/lib/apt/lists/*
 
-# Set working directory for installation
-WORKDIR     /mnt/server
+USER        container
+ENV         USER=container HOME=/home/container
+WORKDIR     /home/container
+
+STOPSIGNAL SIGINT
+
+COPY        --chown=container:container ./../entrypoint.sh /entrypoint.sh
+RUN         chmod +x /entrypoint.sh
+ENTRYPOINT    ["/usr/bin/tini", "-g", "--"]
+CMD         ["/entrypoint.sh"]
