@@ -1,4 +1,4 @@
-FROM        --platform=$TARGETOS/$TARGETARCH  ghcr.io/astral-sh/uv:3.11-slim-bookworm
+FROM        --platform=$TARGETOS/$TARGETARCH  ghcr.io/astral-sh/uv:python3.11-bookworm-slim
 
 LABEL       author="Michael Parker" maintainer="parker@pterodactyl.io"
 
