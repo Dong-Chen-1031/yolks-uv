@@ -1,0 +1,128 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2025-12-13T06:36:48+00:00",
+    "name": "python with uv",
+    "author": "eggs@doong.me",
+    "description": "A Python with uv Egg for Pelican & Pterodactyl\n\nEdit from: https:\/\/github.com\/pelican-eggs\/generic",
+    "features": null,
+    "docker_images": {
+        "Python 3.14": "ghcr.io\/dong-chen-1031\/yolks:python_uv_3.14",
+        "Python 3.13": "ghcr.io\/dong-chen-1031\/yolks:python_uv_3.13",
+        "Python 3.12": "ghcr.io\/dong-chen-1031\/yolks:python_uv_3.12",
+        "Python 3.11": "ghcr.io\/dong-chen-1031\/yolks:python_uv_3.11",
+        "Python 3.10": "ghcr.io\/dong-chen-1031\/yolks:python_uv_3.10",
+        "Python 3.9": "ghcr.io\/dong-chen-1031\/yolks:python_uv_3.9",
+        "Python 3.8": "ghcr.io\/dong-chen-1031\/yolks:python_uv_3.8"
+    },
+    "file_denylist": [],
+    "startup": "",
+    "config": {
+        "files": "{}",
+        "startup": "{\n    \"done\": [\n        \"change this text 1\",\n        \"change this text 2\"\n    ]\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "",
+            "container": "ghcr.io\/dong-chen-1031\/yolks:python_uv_installer",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Additional Python packages",
+            "description": "Install additional python packages.\r\n\r\nUse spaces to separate",
+            "env_variable": "PY_PACKAGES",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string",
+            "field_type": "text"
+        },
+        {
+            "name": "App py file",
+            "description": "The file that starts the App.",
+            "env_variable": "PY_FILE",
+            "default_value": "app.py",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Auto Update",
+            "description": "Pull the latest files on startup when using a GitHub repo.",
+            "env_variable": "AUTO_UPDATE",
+            "default_value": "0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "Git Access Token",
+            "description": "Password to use with git.\r\n\r\nIt's best practice to use a Personal Access Token.\r\nhttps:\/\/github.com\/settings\/tokens\r\nhttps:\/\/gitlab.com\/-\/profile\/personal_access_tokens",
+            "env_variable": "ACCESS_TOKEN",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Git Branch",
+            "description": "What branch to pull from github.\r\n\r\nDefault is blank to pull the repo default branch",
+            "env_variable": "BRANCH",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Git Repo Address",
+            "description": "Git repo to clone\r\n\r\nI.E. https:\/\/github.com\/parkervcp\/repo_name",
+            "env_variable": "GIT_ADDRESS",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Git Username",
+            "description": "Username to auth with git.",
+            "env_variable": "USERNAME",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Requirements file",
+            "description": "if there are other requirements files to choose from.",
+            "env_variable": "REQUIREMENTS_FILE",
+            "default_value": "requirements.txt",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "User Uploaded Files",
+            "description": "Skip all the install stuff if you are letting a user upload files.\r\n\r\n0 = false (default)\r\n1 = true",
+            "env_variable": "USER_UPLOAD",
+            "default_value": "0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
+            "field_type": "text"
+        }
+    ]
+}
