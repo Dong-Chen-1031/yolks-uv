@@ -45,6 +45,16 @@
             "field_type": "text"
         },
         {
+            "name": "Dependency Install Mode",
+            "description": "pip = uv pip install (uses Requirements file + Additional Python packages), sync = uv sync (uses pyproject.toml; ignores both).",
+            "env_variable": "DEPENDENCY_INSTALL_MODE",
+            "default_value": "pip",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:pip,uv",
+            "field_type": "text"
+        },
+        {
             "name": "App py file",
             "description": "The file that starts the App.",
             "env_variable": "PY_FILE",

@@ -27,7 +27,7 @@
     },
     "config": {
         "files": "{}",
-        "startup": "",
+        "startup": "{\n    \"done\": [\n        \"change this text 1\",\n        \"change this text 2\"\n    ]\n}",
         "logs": "{}",
         "stop": "^C"
     },
