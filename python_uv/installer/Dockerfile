@@ -1,4 +1,4 @@
-FROM        --platform=$TARGETOS/$TARGETARCH ghcr.io/astral-sh/uv:python3.13-bookworm-slim
+FROM        --platform=$TARGETOS/$TARGETARCH ghcr.io/astral-sh/uv:python3.12-bookworm-slim
 
 LABEL       author="eggs@doong.me" maintainer="eggs@doong.me"
 LABEL       org.opencontainers.image.description="Installer image for Python UV eggs with all build dependencies"

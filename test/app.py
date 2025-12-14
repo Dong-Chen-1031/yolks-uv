@@ -1,2 +1,4 @@
-from rich import print
-print("[bold green]This is a test app for yolks-uv project.[/bold green]")
+from datetime import datetime
+
+now = datetime.now()
+print(now.strftime("%Y-%m-%d %H:%M:%S.%f"))
