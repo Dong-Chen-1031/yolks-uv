@@ -6,7 +6,7 @@
 English | [Traditional Chinese](README.zh-TW.md)
 
 ## Features
-- 170+ times faster server installation speed and 10-100 times faster package installation speed compared to [regular Python Egg](https://github.com/pelican-eggs/generic/tree/main/python).
+- 180 times faster server installation speed and 10-100 times faster package installation speed compared to [regular Python Egg](https://github.com/pelican-eggs/generic/tree/main/python).
 - Supports both traditional pip workflow and modern uv package management workflow.
 - Optimized installer container with pre-installed build dependencies to avoid wasting time on unnecessary installations.
 - Allows users to pull their own Python source code from GitHub repositories.
