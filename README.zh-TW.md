@@ -6,7 +6,7 @@
 [English](README.md) | 繁體中文
 
 ## 特點
-- 比[普通的 Python Egg](https://github.com/pelican-eggs/generic/tree/main/python) 快 170+ 倍的伺服器安裝速度、10-100 倍的套件安裝速度。
+- 比[普通的 Python Egg](https://github.com/pelican-eggs/generic/tree/main/python) 快 180+ 倍的伺服器安裝速度、10-100 倍的套件安裝速度。
 - 同時支援傳統的 pip 工作流程和現代的 uv 套件管理流程。
 - 安裝容器優化，預裝建置依賴，避免不必要的安裝造成時間浪費。
 - 允許用戶從 Github 儲存庫拉取自己的 Python 原始碼。
